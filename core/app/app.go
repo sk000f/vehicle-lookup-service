@@ -1,0 +1,30 @@
+package app
+
+import (
+	"github.com/sk000f/vinlookup/core/domain"
+	"github.com/sk000f/vinlookup/core/ports"
+)
+
+type App struct {
+	r ports.Repository
+}
+
+func New(r ports.Repository) *App {
+	return &App{
+		r: r,
+	}
+}
+
+func (a *App) AddVehicle(v domain.Vehicle) error {
+	err := a.r.Save(v)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (a *App) LookupVehicle(VIN int) (domain.Vehicle, error) {
+	return a.r.Lookup(VIN)
+}
