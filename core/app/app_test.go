@@ -66,6 +66,36 @@ func TestLookupVehicle(t *testing.T) {
 
 }
 
+func TestPaintVehicle(t *testing.T) {
+	r := createMockRepository()
+
+	v := domain.Vehicle{
+		VIN:    12345,
+		Make:   "Land Rover",
+		Model:  "Discovery",
+		Colour: "Silver",
+	}
+
+	r.Data = append(r.Data, v)
+
+	a := app.New(r)
+
+	v2 := &v
+	v2.Colour = "Black"
+
+	want := *v2
+
+	got, err := a.PaintVehicle(12345, "Black")
+	if err != nil {
+		t.Errorf("test failed with error: %v", err)
+	}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %v; want %v", got, want)
+	}
+
+}
+
 type mockRepository struct {
 	Data []domain.Vehicle
 }
