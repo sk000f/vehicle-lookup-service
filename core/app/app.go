@@ -35,12 +35,14 @@ func (a *App) PaintVehicle(VIN int, c string) (domain.Vehicle, error) {
 		return domain.Vehicle{}, err
 	}
 
-	v2 := &v
-	v2.Colour = c
+	//v2 := &v
+	//v2.Colour = c
 
-	err = a.r.Save(*v2)
+	v.Colour = c
+
+	err = a.r.Save(v)
 	if err != nil {
 		return domain.Vehicle{}, err
 	}
-	return *v2, nil
+	return v, nil
 }
