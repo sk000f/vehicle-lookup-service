@@ -35,9 +35,6 @@ func (a *App) PaintVehicle(VIN int, c string) (domain.Vehicle, error) {
 		return domain.Vehicle{}, err
 	}
 
-	//v2 := &v
-	//v2.Colour = c
-
 	v.Colour = c
 
 	err = a.r.Save(v)
