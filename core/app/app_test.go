@@ -80,10 +80,9 @@ func TestPaintVehicle(t *testing.T) {
 
 	a := app.New(r)
 
-	v2 := &v
-	v2.Colour = "Black"
+	v.Colour = "Black"
 
-	want := *v2
+	want := v
 
 	got, err := a.PaintVehicle(12345, "Black")
 	if err != nil {
